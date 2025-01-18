@@ -68,6 +68,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
         }
 
         #playPauseButton:hover {
@@ -76,20 +77,26 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* Hiệu ứng viền nhấp nháy khi nhạc phát */
+        /* Hiệu ứng đèn chạy quanh viền khi nhạc phát */
         .playing {
-            animation: pulse 0.8s infinite;
+            animation: light-glow 1.5s linear infinite;
         }
 
-        @keyframes pulse {
+        @keyframes light-glow {
             0% {
-                box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+                box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+            }
+            25% {
+                box-shadow: 0 0 15px #ff8c00, 0 0 30px #ff8c00, 0 0 40px #ff8c00, 0 0 50px #ff8c00;
             }
             50% {
-                box-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+                box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00, 0 0 60px #ffff00, 0 0 70px #ffff00;
+            }
+            75% {
+                box-shadow: 0 0 25px #00ff00, 0 0 50px #00ff00, 0 0 70px #00ff00, 0 0 80px #00ff00;
             }
             100% {
-                box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+                box-shadow: 0 0 30px #0000ff, 0 0 60px #0000ff, 0 0 90px #0000ff, 0 0 100px #0000ff;
             }
         }
     </style>
@@ -107,7 +114,7 @@
         <a href="bank.html" target="_blank">Bank</a>
 
         <!-- Nút Play/Pause để phát/tắt nhạc -->
-        <button id="playPauseButton">▶ Nhạc</button>
+        <button id="playPauseButton">▶ Phát nhạc</button>
     </div>
     <footer>
         © Lê Anh Tường 2006.
@@ -128,11 +135,11 @@
         playPauseButton.addEventListener("click", function() {
             if (audio.paused) {
                 audio.play(); // Phát nhạc
-                playPauseButton.innerText = "Dừng"; // Đổi thành dấu "pause" khi nhạc đang phát
+                playPauseButton.innerText = "⏸ Dừng nhạc"; // Đổi thành dấu "pause" khi nhạc đang phát
                 playPauseButton.classList.add("playing"); // Thêm lớp hiệu ứng khi nhạc phát
             } else {
                 audio.pause(); // Dừng nhạc
-                playPauseButton.innerText = "Phát"; // Đổi thành dấu "play" khi nhạc dừng
+                playPauseButton.innerText = "▶ Phát nhạc"; // Đổi thành dấu "play" khi nhạc dừng
                 playPauseButton.classList.remove("playing"); // Xóa lớp hiệu ứng khi nhạc dừng
             }
         });
