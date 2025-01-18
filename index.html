@@ -70,12 +70,45 @@
             border-radius: 25px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
+        /* Hiệu ứng hover khi nhấn */
         #playPauseButton:hover {
             background-color: #2563eb;
             transform: translateY(-5px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Viền nhịp nhạc */
+        .pulse-border {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: pulse-animation 1s infinite ease-in-out;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+
+        /* Animation nhịp nhạc */
+        @keyframes pulse-animation {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
         }
 
     </style>
@@ -93,7 +126,7 @@
         <a href="bank.html" target="_blank">Bank</a>
 
         <!-- Nút Play/Pause để phát/tắt nhạc -->
-        <button id="playPauseButton">▶ Phát nhạc</button>
+        <button id="playPauseButton">▶ Nhạc</button>
     </div>
     <footer>
         © Lê Anh Tường 2006.
@@ -110,14 +143,27 @@
         const playPauseButton = document.getElementById("playPauseButton");
         const audio = document.getElementById("myAudio");
 
+        // Tạo đối tượng viền nhịp nhạc
+        let pulseBorder = null;
+
         // Xử lý sự kiện nhấn nút
         playPauseButton.addEventListener("click", function() {
             if (audio.paused) {
                 audio.play(); // Phát nhạc
-                playPauseButton.innerText = "Dừng"; // Đổi thành dấu "pause" khi nhạc đang phát
+                playPauseButton.innerText = "⏸ Dừng nhạc"; // Đổi thành dấu "pause" khi nhạc đang phát
+                
+                // Thêm viền nhịp nhạc
+                pulseBorder = document.createElement("div");
+                pulseBorder.classList.add("pulse-border");
+                playPauseButton.appendChild(pulseBorder);
             } else {
                 audio.pause(); // Dừng nhạc
-                playPauseButton.innerText = "Phát"; // Đổi thành dấu "play" khi nhạc dừng
+                playPauseButton.innerText = "▶ Phát nhạc"; // Đổi thành dấu "play" khi nhạc dừng
+                
+                // Xóa viền nhịp nhạc
+                if (pulseBorder) {
+                    pulseBorder.remove();
+                }
             }
         });
     </script>
