@@ -76,17 +76,31 @@
             background-color: #2563eb;
         }
 
-        /* Hiệu ứng đèn chạy quanh viền màu vàng */
+        /* Hiệu ứng đèn chạy quanh viền khi nhạc phát */
         .playing {
-            animation: light-glow 1.5s linear infinite;
+            animation: light-glow 3s linear infinite;
         }
 
         @keyframes light-glow {
             0% {
-                box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ffd700;
+                border: 3px solid #ffd700;
+                box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
+            }
+            25% {
+                border: 3px solid #ff0000;
+                box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+            }
+            50% {
+                border: 3px solid #00ff00;
+                box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            }
+            75% {
+                border: 3px solid #00ffff;
+                box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
             }
             100% {
-                box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ffd700;
+                border: 3px solid #ffd700;
+                box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
             }
         }
     </style>
