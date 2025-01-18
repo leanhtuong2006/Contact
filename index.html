@@ -66,15 +66,13 @@
             background-color: #3b82f6;
             border-radius: 25px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         #playPauseButton:hover {
             background-color: #2563eb;
-            transform: translateY(-5px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
         }
 
         /* Hiệu ứng đèn chạy quanh viền khi nhạc phát */
@@ -84,19 +82,19 @@
 
         @keyframes light-glow {
             0% {
-                box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+                box-shadow: 0 0 5px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000, 0 0 25px #ff0000;
             }
             25% {
-                box-shadow: 0 0 15px #ff8c00, 0 0 30px #ff8c00, 0 0 40px #ff8c00, 0 0 50px #ff8c00;
+                box-shadow: 0 0 10px #ff8c00, 0 0 20px #ff8c00, 0 0 30px #ff8c00, 0 0 40px #ff8c00;
             }
             50% {
-                box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00, 0 0 60px #ffff00, 0 0 70px #ffff00;
+                box-shadow: 0 0 15px #ffff00, 0 0 25px #ffff00, 0 0 35px #ffff00, 0 0 45px #ffff00;
             }
             75% {
-                box-shadow: 0 0 25px #00ff00, 0 0 50px #00ff00, 0 0 70px #00ff00, 0 0 80px #00ff00;
+                box-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff00;
             }
             100% {
-                box-shadow: 0 0 30px #0000ff, 0 0 60px #0000ff, 0 0 90px #0000ff, 0 0 100px #0000ff;
+                box-shadow: 0 0 25px #0000ff, 0 0 35px #0000ff, 0 0 45px #0000ff, 0 0 55px #0000ff;
             }
         }
     </style>
