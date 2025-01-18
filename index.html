@@ -54,34 +54,32 @@
             margin-top: 20px;
         }
 
-        /* Thiết kế cho nút Play Music đẹp mắt */
-        #playButton {
+        /* Thiết kế cho nút Play/Pause */
+        #playPauseButton {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(145deg, #ff6b81, #ff3f5f); /* Gradient màu sắc */
+            background-color: #ff6b81; /* Màu của nút */
             color: white;
-            font-size: 20px;
-            padding: 18px 36px;
-            border-radius: 50px; /* Bo tròn hoàn toàn */
-            box-shadow: 0 5px 20px rgba(255, 105, 135, 0.5); /* Tạo bóng đổ xung quanh */
+            font-size: 30px;
+            padding: 15px 30px;
+            border-radius: 50%;
+            box-shadow: 0 5px 20px rgba(255, 105, 135, 0.5);
             cursor: pointer;
             border: none;
             transition: all 0.3s ease;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
-        #playButton:hover {
-            background: linear-gradient(145deg, #ff3f5f, #ff6b81); /* Đổi gradient khi hover */
-            transform: translateX(-50%) translateY(-5px); /* Nâng nút khi hover */
-            box-shadow: 0 8px 30px rgba(255, 105, 135, 0.6); /* Làm đậm bóng đổ */
+        #playPauseButton:hover {
+            background-color: #ff3f5f;
+            transform: translateX(-50%) translateY(-5px);
+            box-shadow: 0 8px 30px rgba(255, 105, 135, 0.6);
         }
-        #playButton:active {
-            transform: translateX(-50%) translateY(2px); /* Hiệu ứng khi nhấn */
+        #playPauseButton:active {
+            transform: translateX(-50%) translateY(2px);
             box-shadow: 0 4px 15px rgba(255, 105, 135, 0.4);
         }
+
     </style>
 </head>
 <body>
@@ -100,20 +98,29 @@
         © Lê Anh Tường 2006.
     </footer>
 
-    <!-- Nút Play để phát nhạc -->
-    <button id="playButton">Play Music</button>
+    <!-- Nút Play/Pause để phát/tắt nhạc -->
+    <button id="playPauseButton">▶</button>
 
-    <!-- Thẻ audio, không tự động phát mà sẽ phát khi người dùng nhấn nút -->
+    <!-- Thẻ audio -->
     <audio id="myAudio">
         <source src="ngaytraitimkhoc.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Hàm phát âm thanh khi nhấn nút
-        document.getElementById("playButton").addEventListener("click", function() {
-            var audio = document.getElementById("myAudio");
-            audio.play(); // Bắt đầu phát âm thanh
+        // Lấy nút và âm thanh
+        const playPauseButton = document.getElementById("playPauseButton");
+        const audio = document.getElementById("myAudio");
+
+        // Xử lý sự kiện nhấn nút
+        playPauseButton.addEventListener("click", function() {
+            if (audio.paused) {
+                audio.play(); // Phát nhạc
+                playPauseButton.innerText = "⏸"; // Đổi thành dấu "pause" khi nhạc đang phát
+            } else {
+                audio.pause(); // Dừng nhạc
+                playPauseButton.innerText = "▶"; // Đổi thành dấu "play" khi nhạc dừng
+            }
         });
     </script>
 </body>
