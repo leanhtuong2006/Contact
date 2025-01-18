@@ -56,28 +56,30 @@
 
         /* Thiết kế cho nút Play/Pause */
         #playPauseButton {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #ff6b81; /* Màu của nút */
-            color: white;
-            font-size: 30px;
+            display: inline-block;
+            margin: 10px;
             padding: 15px 30px;
-            border-radius: 50%;
-            box-shadow: 0 5px 20px rgba(255, 105, 135, 0.5);
-            cursor: pointer;
-            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            background-color: #3b82f6;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
+
         #playPauseButton:hover {
-            background-color: #ff3f5f;
-            transform: translateX(-50%) translateY(-5px);
-            box-shadow: 0 8px 30px rgba(255, 105, 135, 0.6);
+            background-color: #2563eb;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
         }
-        #playPauseButton:active {
-            transform: translateX(-50%) translateY(2px);
-            box-shadow: 0 4px 15px rgba(255, 105, 135, 0.4);
+
+        /* Đảm bảo video YouTube nhúng vừa màn hình */
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
         }
 
     </style>
@@ -93,33 +95,37 @@
         <a href="https://www.tiktok.com/@emtrai.khatvong?_t=ZS-8t29ApZOVMX&_r=1" target="_blank">TikTok</a>
         <a href="tel:0334272293">Hotline</a>
         <a href="bank.html" target="_blank">Bank</a>
+
+        <!-- Nút Play/Pause để phát/tắt nhạc -->
+        <button id="playPauseButton">▶ Phát nhạc</button>
     </div>
     <footer>
         © Lê Anh Tường 2006.
     </footer>
 
-    <!-- Nút Play/Pause để phát/tắt nhạc -->
-    <button id="playPauseButton">▶</button>
-
-    <!-- Thẻ audio -->
-    <audio id="myAudio">
-        <source src="ngaytraitimkhoc.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <!-- Nhúng video YouTube -->
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/STuTSBX_aFA?list=PL_0bRnsjL1PayLg9OV_1Ibz1AajMovFO_&autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
 
     <script>
-        // Lấy nút và âm thanh
+        // Lấy nút và video
         const playPauseButton = document.getElementById("playPauseButton");
-        const audio = document.getElementById("myAudio");
+        const iframe = document.querySelector("iframe");
 
         // Xử lý sự kiện nhấn nút
         playPauseButton.addEventListener("click", function() {
-            if (audio.paused) {
-                audio.play(); // Phát nhạc
-                playPauseButton.innerText = "⏸"; // Đổi thành dấu "pause" khi nhạc đang phát
+            const iframeSrc = iframe.src;
+
+            // Kiểm tra xem video có đang phát hay không
+            if (iframeSrc.includes("autoplay=1")) {
+                // Tạm dừng video bằng cách tắt autoplay
+                iframe.src = iframeSrc.replace("autoplay=1", "autoplay=0");
+                playPauseButton.innerText = "▶ Phát nhạc";
             } else {
-                audio.pause(); // Dừng nhạc
-                playPauseButton.innerText = "▶"; // Đổi thành dấu "play" khi nhạc dừng
+                // Phát video bằng cách bật autoplay
+                iframe.src = iframeSrc.replace("autoplay=0", "autoplay=1");
+                playPauseButton.innerText = "⏸ Dừng nhạc";
             }
         });
     </script>
