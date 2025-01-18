@@ -150,7 +150,7 @@
         playPauseButton.addEventListener("click", function() {
             if (audio.paused) {
                 audio.play(); // Phát nhạc
-                playPauseButton.innerText = "⏸ Dừng nhạc"; // Đổi thành dấu "pause" khi nhạc đang phát
+                playPauseButton.innerText = "Dừng"; // Đổi thành dấu "pause" khi nhạc đang phát
                 
                 // Thêm viền nhịp nhạc
                 pulseBorder = document.createElement("div");
@@ -158,7 +158,7 @@
                 playPauseButton.appendChild(pulseBorder);
             } else {
                 audio.pause(); // Dừng nhạc
-                playPauseButton.innerText = "▶ Phát nhạc"; // Đổi thành dấu "play" khi nhạc dừng
+                playPauseButton.innerText = "Phát"; // Đổi thành dấu "play" khi nhạc dừng
                 
                 // Xóa viền nhịp nhạc
                 if (pulseBorder) {
