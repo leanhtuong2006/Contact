@@ -118,7 +118,7 @@
         <a href="bank.html" target="_blank">Bank</a>
 
         <!-- Nút Play/Pause để phát/tắt nhạc -->
-        <button id="playPauseButton">▶ Phát nhạc</button>
+        <button id="playPauseButton">▶ Nhạc</button>
     </div>
     <footer>
         © Lê Anh Tường 2006.
@@ -139,11 +139,11 @@
         playPauseButton.addEventListener("click", function() {
             if (audio.paused) {
                 audio.play(); // Phát nhạc
-                playPauseButton.innerText = "⏸ Dừng nhạc"; // Đổi thành dấu "pause" khi nhạc đang phát
+                playPauseButton.innerText = "Dừng"; // Đổi thành dấu "pause" khi nhạc đang phát
                 playPauseButton.classList.add("playing"); // Thêm lớp hiệu ứng khi nhạc phát
             } else {
                 audio.pause(); // Dừng nhạc
-                playPauseButton.innerText = "▶ Phát nhạc"; // Đổi thành dấu "play" khi nhạc dừng
+                playPauseButton.innerText = "Phát"; // Đổi thành dấu "play" khi nhạc dừng
                 playPauseButton.classList.remove("playing"); // Xóa lớp hiệu ứng khi nhạc dừng
             }
         });
