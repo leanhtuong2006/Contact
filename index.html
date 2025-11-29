@@ -54,7 +54,6 @@
             margin-top: 20px;
         }
 
-        /* Thiết kế cho nút Play/Pause */
         #playPauseButton {
             display: inline-block;
             margin: 10px;
@@ -76,7 +75,7 @@
             background-color: #2563eb;
         }
 
-        /* Hiệu ứng đèn chạy quanh viền khi nhạc phát */
+       
         .playing {
             animation: light-glow 3s linear infinite;
         }
@@ -110,40 +109,37 @@
         <img src="avatar.jpg" alt="Lê Anh Tường" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
     </header>
     <div class="container">
-        <p> Mod App & Fix Android </p>
+        <p> App Optimize Android & Game </p>
         <a href="https://youtube.com/@modlite?si=x4141pyAqyIa0FQ7" target="_blank">YouTube</a>
         <a href="https://zalo.me/0334272293" target="_blank">Zalo</a>
         <a href="https://www.tiktok.com/@anhtuong.06?is_from_webapp=1&sender_device=pc" target="_blank">TikTok</a>
         <a href="tel:0334272293">Hotline</a>
         <a href="bank.html" target="_blank">Bank</a>
 
-        <!-- Nút Play/Pause để phát/tắt nhạc -->
+
         <button id="playPauseButton">▶ Nhạc</button>
     </div>
 
     </footer>
 
-    <!-- Thẻ audio -->
     <audio id="myAudio">
         <source src="ngaytraitimkhoc.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Lấy nút và âm thanh
         const playPauseButton = document.getElementById("playPauseButton");
         const audio = document.getElementById("myAudio");
 
-        // Xử lý sự kiện nhấn nút
         playPauseButton.addEventListener("click", function() {
             if (audio.paused) {
-                audio.play(); // Phát nhạc
-                playPauseButton.innerText = "Dừng"; // Đổi thành dấu "pause" khi nhạc đang phát
-                playPauseButton.classList.add("playing"); // Thêm lớp hiệu ứng khi nhạc phát
+                audio.play();
+                playPauseButton.innerText = "Dừng"; 
+                playPauseButton.classList.add("playing"); 
             } else {
-                audio.pause(); // Dừng nhạc
-                playPauseButton.innerText = "Phát"; // Đổi thành dấu "play" khi nhạc dừng
-                playPauseButton.classList.remove("playing"); // Xóa lớp hiệu ứng khi nhạc dừng
+                audio.pause(); 
+                playPauseButton.innerText = "Phát"; 
+                playPauseButton.classList.remove("playing"); 
             }
         });
     </script>
