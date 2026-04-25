@@ -1,96 +1,208 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank - Lê Anh Tường</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank - Lê Anh Tường</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-        body {
-            min-height: 100vh;
-            background:
-                radial-gradient(circle at 20% 10%, rgba(255,255,255,0.06), transparent 30%),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05), transparent 30%),
-                linear-gradient(135deg, #000000, #020617, #000000);
-            color: #fff;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+html,body{
+  width:100%;
+  min-height:100%;
+  background:#000;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-        .page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px 80px;
-        }
+body{
+  overflow:hidden;
+}
 
-        h1 {
-            font-size: 28px;
-            margin-bottom: 40px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
 
-        .info {
-            font-size: 18px;
-            line-height: 2;
-            color: #ddd;
-        }
+.page{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px 20px;
+}
 
-        .info strong {
-            color: #fff;
-        }
+h1{
+  font-size:clamp(42px,6vw,82px);
+  margin-bottom:38px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
 
-        img {
-            width: 200px;
-            margin-top: 30px;
-        }
+.info{
+  font-size:clamp(22px,2.2vw,32px);
+  line-height:2;
+  color:#ddd;
+}
 
-        footer {
-            position: fixed;
-            bottom: 15px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 13px;
-            color: #888;
-        }
+.info strong{
+  color:#fff;
+}
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 22px;
-            }
+.qr{
+  width:clamp(280px,28vw,430px);
+  margin-top:38px;
+  background:#fff;
+  padding:10px;
+}
 
-            .info {
-                font-size: 16px;
-            }
-        }
-    </style>
+footer{
+  position:fixed;
+  bottom:18px;
+  left:0;
+  right:0;
+  z-index:2;
+  text-align:center;
+  font-size:14px;
+  color:#888;
+}
+
+@media(max-width:600px){
+  body{overflow:auto}
+
+  .page{
+    padding:45px 18px 80px;
+  }
+
+  .info{
+    font-size:18px;
+  }
+
+  .qr{
+    width:280px;
+  }
+}
+</style>
 </head>
 
 <body>
-    <div class="page">
-        <h1>Bank</h1>
+<canvas id="web"></canvas>
 
-        <div class="info">
-            <p><strong>Tên chủ tài khoản:</strong> LE ANH TUONG</p>
-            <p><strong>Số tài khoản:</strong> 9334272293</p>
-            <p><strong>Ngân hàng:</strong> Vietcombank</p>
-        </div>
+<main class="page">
+  <h1>Bank</h1>
 
-        <img src="qr-code.png" alt="QR Code">
-    </div>
+  <div class="info">
+    <p><strong>Tên chủ tài khoản:</strong> LE ANH TUONG</p>
+    <p><strong>Số tài khoản:</strong> 9334272293</p>
+    <p><strong>Ngân hàng:</strong> Vietcombank</p>
+  </div>
 
-    <footer>
-        © Lê Anh Tường 2006
-    </footer>
+  <img class="qr" src="qr-code.png" alt="QR Code">
+</main>
+
+<footer>© Lê Anh Tường 2006</footer>
+
+<script>
+const canvas = document.getElementById("web");
+const ctx = canvas.getContext("2d");
+
+let w, h;
+let particles = [];
+let mouse = { x: null, y: null };
+
+function resize(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+
+resize();
+window.addEventListener("resize", resize);
+
+const COUNT = 130;
+
+function init(){
+  particles = [];
+
+  for(let i = 0; i < COUNT; i++){
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.65,
+      vy: (Math.random() - 0.5) * 0.65,
+      r: Math.random() * 1.4 + 1
+    });
+  }
+}
+
+init();
+
+window.addEventListener("mousemove", e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+window.addEventListener("touchmove", e => {
+  if(!e.touches[0]) return;
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
+});
+
+function draw(){
+  ctx.clearRect(0,0,w,h);
+
+  for(let i = 0; i < particles.length; i++){
+    const p = particles[i];
+
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if(p.x < 0 || p.x > w) p.vx *= -1;
+    if(p.y < 0 || p.y > h) p.vy *= -1;
+
+    if(mouse.x !== null){
+      const dx = p.x - mouse.x;
+      const dy = p.y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if(dist < 150){
+        p.x += dx / 28;
+        p.y += dy / 28;
+      }
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255,255,255,0.78)";
+    ctx.fill();
+
+    for(let j = i + 1; j < particles.length; j++){
+      const p2 = particles[j];
+      const dx = p.x - p2.x;
+      const dy = p.y - p2.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if(dist < 130){
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = "rgba(255,255,255," + (1 - dist / 130) * 0.22 + ")";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
 </body>
 </html>
