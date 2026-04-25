@@ -1,205 +1,205 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lê Anh Tường</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lê Anh Tường</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#000;
+  color:#fff;
+  font-family:Arial;
+  overflow:hidden;
+}
 
-    html, body {
-      width: 100%;
-      min-height: 100%;
-      background: #000;
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+canvas{
+  position:fixed;
+  top:0;left:0;
+  z-index:0;
+}
 
-    body {
-      overflow-x: hidden;
-    }
+.page{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px 20px 140px;
+}
 
-    .snow {
-      position: fixed;
-      top: -10px;
-      color: white;
-      user-select: none;
-      pointer-events: none;
-      z-index: 1;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      opacity: 0.85;
-    }
+.quote{
+  max-width:1100px;
+  font-size:clamp(26px,5vw,64px);
+  line-height:1.25;
+  font-weight:bold;
+  letter-spacing:-1px;
+  white-space:nowrap;
+}
 
-    @keyframes fall {
-      0% {
-        transform: translateY(-10vh) translateX(0);
-      }
-      100% {
-        transform: translateY(110vh) translateX(40px);
-      }
-    }
+.desc{
+  margin-top:25px;
+  font-size:clamp(15px,2vw,22px);
+  max-width:800px;
+  color:#ccc;
+  line-height:1.8;
+}
 
-    .page {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px 18px 150px;
-    }
+.contact{
+  position:fixed;
+  bottom:0;
+  left:0;right:0;
+  text-align:center;
+  padding:18px;
+  background:#000;
+  border-top:1px solid #222;
+}
 
-    .quote {
-      max-width: 900px;
-      font-size: clamp(24px, 5vw, 58px);
-      line-height: 1.35;
-      font-weight: 700;
-      letter-spacing: -1px;
-      text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
-    }
+.contact a{
+  color:#fff;
+  margin:0 10px;
+  font-size:14px;
+  text-decoration:none;
+  opacity:.8;
+}
+.contact a:hover{opacity:1}
 
-    .desc {
-      max-width: 850px;
-      margin-top: 28px;
-      font-size: clamp(15px, 2.2vw, 22px);
-      line-height: 1.8;
-      color: #d6d6d6;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.18);
-    }
-
-    .contact {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 3;
-      background: #000;
-      border-top: 1px solid #222;
-      padding: 18px 12px;
-      text-align: center;
-    }
-
-    .contact h2 {
-      font-size: 16px;
-      margin-bottom: 12px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px 22px;
-    }
-
-    .contact a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      opacity: 0.85;
-    }
-
-    .contact a:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
-
-    .music-note {
-      margin-top: 18px;
-      font-size: 13px;
-      color: #888;
-    }
-
-    @media (max-width: 600px) {
-      .page {
-        padding-bottom: 210px;
-      }
-
-      .contact-links {
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
-  </style>
+.music-note{
+  margin-top:18px;
+  font-size:13px;
+  color:#888;
+}
+</style>
 </head>
+
 <body>
-  <main class="page">
-    <h1 class="quote">“Dù trong tro tàn hoa vẫn sẽ mọc”</h1>
+<canvas id="web"></canvas>
 
-    <p class="desc">
-      Từ đó chúng ta thấy được dù trong hoàn cảnh nào, chỉ cần chúng ta có niềm tin,
-      có động lực sống thì môi trường cũng chỉ là một phần nhỏ để chúng ta vượt qua.
-      Động lực giúp con người chiến thắng nỗi sợ.
-    </p>
+<div class="page">
+  <div class="quote">“Dù trong tro tàn hoa vẫn sẽ mọc”</div>
 
-    <p class="music-note">Lướt, chạm hoặc click vào trang để phát nhạc.</p>
-  </main>
+  <div class="desc">
+    Dù trong hoàn cảnh nào, chỉ cần có niềm tin và động lực sống,
+    môi trường chỉ là một phần nhỏ. Chính động lực giúp con người
+    chiến thắng nỗi sợ.
+  </div>
 
-  <footer class="contact">
-    <h2>Thông tin liên hệ</h2>
-    <div class="contact-links">
-      <a href="https://youtube.com/@modlite?si=x4141pyAqyIa0FQ7" target="_blank">YouTube</a>
-      <a href="https://zalo.me/0334272293" target="_blank">Zalo: 0334272293</a>
-      <a href="https://www.tiktok.com/@anhtuong.06?is_from_webapp=1&sender_device=pc" target="_blank">TikTok</a>
-      <a href="tel:0334272293">Hotline: 0334272293</a>
-      <a href="bank.html" target="_blank">Bank</a>
-    </div>
-  </footer>
+</div>
 
-  <audio id="myAudio" loop preload="auto" playsinline>
-    <source src="Call of silence.mp3" type="audio/mpeg" />
-  </audio>
+<div class="contact">
+  <a href="https://youtube.com/@modlite" target="_blank">YouTube</a>
+  <a href="https://zalo.me/0334272293" target="_blank">Zalo</a>
+  <a href="https://www.tiktok.com/@anhtuong.06" target="_blank">TikTok</a>
+  <a href="tel:0334272293">Hotline</a>
+  <a href="bank.html">Bank</a>
+</div>
 
-  <script>
-    const audio = document.getElementById("myAudio");
-    audio.volume = 0.75;
+<audio id="audio" loop>
+  <source src="ngaytraitimkhoc.mp3" type="audio/mpeg">
+</audio>
 
-    let musicStarted = false;
+<script>
+const canvas = document.getElementById('web');
+const ctx = canvas.getContext('2d');
+let w,h;
 
-    function playMusic() {
-      if (musicStarted) return;
+function resize(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize',resize);
 
-      audio.play().then(() => {
-        musicStarted = true;
-        document.querySelector(".music-note").textContent = "";
-      }).catch(() => {
-        document.querySelector(".music-note").textContent = "";
-      });
+let particles=[];
+const COUNT = 120;
+
+for(let i=0;i<COUNT;i++){
+  particles.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    vx:(Math.random()-0.5)*0.6,
+    vy:(Math.random()-0.5)*0.6
+  });
+}
+
+let mouse={x:null,y:null};
+
+window.addEventListener('mousemove',e=>{
+  mouse.x=e.clientX;
+  mouse.y=e.clientY;
+  playMusic();
+});
+
+window.addEventListener('touchmove',e=>{
+  mouse.x=e.touches[0].clientX;
+  mouse.y=e.touches[0].clientY;
+  playMusic();
+});
+
+function draw(){
+  ctx.clearRect(0,0,w,h);
+
+  for(let i=0;i<particles.length;i++){
+    let p=particles[i];
+
+    p.x+=p.vx;
+    p.y+=p.vy;
+
+    if(p.x<0||p.x>w) p.vx*=-1;
+    if(p.y<0||p.y>h) p.vy*=-1;
+
+    // draw point
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,1.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,0.7)';
+    ctx.fill();
+
+    // connect lines
+    for(let j=i+1;j<particles.length;j++){
+      let p2=particles[j];
+      let dx=p.x-p2.x;
+      let dy=p.y-p2.y;
+      let dist=Math.sqrt(dx*dx+dy*dy);
+
+      if(dist<120){
+        ctx.beginPath();
+        ctx.moveTo(p.x,p.y);
+        ctx.lineTo(p2.x,p2.y);
+        ctx.strokeStyle='rgba(255,255,255,'+(1-dist/120)*0.2+')';
+        ctx.stroke();
+      }
     }
 
-    window.addEventListener("click", playMusic);
-    window.addEventListener("touchstart", playMusic);
-    window.addEventListener("scroll", playMusic);
-    window.addEventListener("mousemove", playMusic, { once: true });
-    window.addEventListener("keydown", playMusic);
+    // mouse interaction
+    if(mouse.x){
+      let dx=p.x-mouse.x;
+      let dy=p.y-mouse.y;
+      let dist=Math.sqrt(dx*dx+dy*dy);
 
-    function createSnow() {
-      const snow = document.createElement("div");
-      snow.className = "snow";
-      snow.textContent = "❄";
-      snow.style.left = Math.random() * 100 + "vw";
-      snow.style.fontSize = Math.random() * 12 + 8 + "px";
-      snow.style.animationDuration = Math.random() * 6 + 5 + "s";
-      snow.style.animationDelay = Math.random() * 2 + "s";
-
-      document.body.appendChild(snow);
-
-      setTimeout(() => {
-        snow.remove();
-      }, 12000);
+      if(dist<120){
+        p.x+=dx/20;
+        p.y+=dy/20;
+      }
     }
+  }
 
-    setInterval(createSnow, 170);
-  </script>
+  requestAnimationFrame(draw);
+}
+
+draw();
+
+// MUSIC
+const audio=document.getElementById('audio');
+let started=false;
+function playMusic(){
+  if(started) return;
+  audio.play().then(()=>started=true).catch(()=>{});
+}
+
+</script>
 </body>
 </html>
