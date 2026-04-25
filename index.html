@@ -16,8 +16,10 @@ body{
 
 canvas{
   position:fixed;
-  top:0;left:0;
+  top:0;
+  left:0;
   z-index:0;
+  pointer-events:none; /* cho phép click xuyên qua */
 }
 
 .page{
@@ -88,6 +90,7 @@ canvas{
     chiến thắng nỗi sợ.
   </div>
 
+  <div class="music-note">Di chuột hoặc chạm để cảm ứng & phát nhạc</div>
 </div>
 
 <div class="contact">
@@ -99,7 +102,7 @@ canvas{
 </div>
 
 <audio id="audio" loop>
-  <source src="ngaytraitimkhoc.mp3" type="audio/mpeg">
+  <source src="Call of silence.mp3" type="audio/mpeg">
 </audio>
 
 <script>
