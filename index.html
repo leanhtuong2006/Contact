@@ -1,147 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lê Anh Tường</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            color: #333;
-            background: linear-gradient(135deg, #1e293b, #475569);
-        }
-        header {
-            background-color: #3b82f6;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            font-size: 28px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .container {
-            padding: 40px 20px;
-            text-align: center;
-            color: #e5e7eb;
-        }
-        .container p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-        .container a {
-            display: inline-block;
-            margin: 10px 10px;
-            padding: 15px 30px;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-            background-color: #3b82f6;
-            border-radius: 25px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        .container a:hover {
-            background-color: #2563eb;
-            transform: translateY(-5px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            color: #cbd5e1;
-            font-size: 14px;
-            margin-top: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lê Anh Tường</title>
 
-        #playPauseButton {
-            display: inline-block;
-            margin: 10px;
-            padding: 15px 30px;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-            background-color: #3b82f6;
-            border-radius: 25px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            border: 3px solid transparent;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        #playPauseButton:hover {
-            background-color: #2563eb;
-        }
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-       
-        .playing {
-            animation: light-glow 3s linear infinite;
-        }
+    body {
+      overflow-x: hidden;
+    }
 
-        @keyframes light-glow {
-            0% {
-                border: 3px solid #ffd700;
-                box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
-            }
-            25% {
-                border: 3px solid #ff0000;
-                box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
-            }
-            50% {
-                border: 3px solid #00ff00;
-                box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
-            }
-            75% {
-                border: 3px solid #00ffff;
-                box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-            }
-            100% {
-                border: 3px solid #ffd700;
-                box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
-            }
-        }
-    </style>
+    .snow {
+      position: fixed;
+      top: -10px;
+      color: white;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) translateX(0);
+      }
+      100% {
+        transform: translateY(110vh) translateX(40px);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 18px 150px;
+    }
+
+    .quote {
+      max-width: 900px;
+      font-size: clamp(24px, 5vw, 58px);
+      line-height: 1.35;
+      font-weight: 700;
+      letter-spacing: -1px;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+    }
+
+    .desc {
+      max-width: 850px;
+      margin-top: 28px;
+      font-size: clamp(15px, 2.2vw, 22px);
+      line-height: 1.8;
+      color: #d6d6d6;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.18);
+    }
+
+    .contact {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      background: #000;
+      border-top: 1px solid #222;
+      padding: 18px 12px;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+    }
+
+    .contact a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .contact a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .music-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding-bottom: 210px;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="avatar.jpg" alt="Lê Anh Tường" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-    </header>
-    <div class="container">
-        <p> App Optimize Android & Game </p>
-        <a href="https://youtube.com/@modlite?si=x4141pyAqyIa0FQ7" target="_blank">YouTube</a>
-        <a href="https://zalo.me/0334272293" target="_blank">Zalo</a>
-        <a href="https://www.tiktok.com/@anhtuong.06?is_from_webapp=1&sender_device=pc" target="_blank">TikTok</a>
-        <a href="tel:0334272293">Hotline</a>
-        <a href="bank.html" target="_blank">Bank</a>
+  <main class="page">
+    <h1 class="quote">“Dù trong tro tàn hoa vẫn sẽ mọc”</h1>
 
+    <p class="desc">
+      Từ đó chúng ta thấy được dù trong hoàn cảnh nào, chỉ cần chúng ta có niềm tin,
+      có động lực sống thì môi trường cũng chỉ là một phần nhỏ để chúng ta vượt qua.
+      Động lực giúp con người chiến thắng nỗi sợ.
+    </p>
 
-        <button id="playPauseButton">▶ Nhạc</button>
+    <p class="music-note">Lướt, chạm hoặc click vào trang để phát nhạc.</p>
+  </main>
+
+  <footer class="contact">
+    <h2>Thông tin liên hệ</h2>
+    <div class="contact-links">
+      <a href="https://youtube.com/@modlite?si=x4141pyAqyIa0FQ7" target="_blank">YouTube</a>
+      <a href="https://zalo.me/0334272293" target="_blank">Zalo: 0334272293</a>
+      <a href="https://www.tiktok.com/@anhtuong.06?is_from_webapp=1&sender_device=pc" target="_blank">TikTok</a>
+      <a href="tel:0334272293">Hotline: 0334272293</a>
+      <a href="bank.html" target="_blank">Bank</a>
     </div>
+  </footer>
 
-    </footer>
+  <audio id="myAudio" loop preload="auto" playsinline>
+    <source src="ngaytraitimkhoc.mp3" type="audio/mpeg" />
+  </audio>
 
-    <audio id="myAudio">
-        <source src="ngaytraitimkhoc.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+  <script>
+    const audio = document.getElementById("myAudio");
+    audio.volume = 0.75;
 
-    <script>
-        const playPauseButton = document.getElementById("playPauseButton");
-        const audio = document.getElementById("myAudio");
+    let musicStarted = false;
 
-        playPauseButton.addEventListener("click", function() {
-            if (audio.paused) {
-                audio.play();
-                playPauseButton.innerText = "Dừng"; 
-                playPauseButton.classList.add("playing"); 
-            } else {
-                audio.pause(); 
-                playPauseButton.innerText = "Phát"; 
-                playPauseButton.classList.remove("playing"); 
-            }
-        });
-    </script>
+    function playMusic() {
+      if (musicStarted) return;
+
+      audio.play().then(() => {
+        musicStarted = true;
+        document.querySelector(".music-note").textContent = "Nhạc đang phát...";
+      }).catch(() => {
+        document.querySelector(".music-note").textContent = "Hãy chạm thêm một lần để bật nhạc.";
+      });
+    }
+
+    window.addEventListener("click", playMusic);
+    window.addEventListener("touchstart", playMusic);
+    window.addEventListener("scroll", playMusic);
+    window.addEventListener("mousemove", playMusic, { once: true });
+    window.addEventListener("keydown", playMusic);
+
+    function createSnow() {
+      const snow = document.createElement("div");
+      snow.className = "snow";
+      snow.textContent = "❄";
+      snow.style.left = Math.random() * 100 + "vw";
+      snow.style.fontSize = Math.random() * 12 + 8 + "px";
+      snow.style.animationDuration = Math.random() * 6 + 5 + "s";
+      snow.style.animationDelay = Math.random() * 2 + "s";
+
+      document.body.appendChild(snow);
+
+      setTimeout(() => {
+        snow.remove();
+      }, 12000);
+    }
+
+    setInterval(createSnow, 170);
+  </script>
 </body>
 </html>
