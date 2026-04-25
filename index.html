@@ -157,7 +157,7 @@
   </footer>
 
   <audio id="myAudio" loop preload="auto" playsinline>
-    <source src="ngaytraitimkhoc.mp3" type="audio/mpeg" />
+    <source src="Call of silence.mp3" type="audio/mpeg" />
   </audio>
 
   <script>
@@ -171,9 +171,9 @@
 
       audio.play().then(() => {
         musicStarted = true;
-        document.querySelector(".music-note").textContent = "Nhạc đang phát...";
+        document.querySelector(".music-note").textContent = "";
       }).catch(() => {
-        document.querySelector(".music-note").textContent = "Hãy chạm thêm một lần để bật nhạc.";
+        document.querySelector(".music-note").textContent = "";
       });
     }
 
